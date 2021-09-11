@@ -38,7 +38,7 @@ describe('Processor', () => {
         const selectedPackages = processor.processPackage(packageItems);
         expect(selectedPackages).toStrictEqual(expectedPackages)
     });
-    test('should select package with less weight if there are packages with same weight that can fit in', () => {
+    test('should select package with more cost if there are packages with same weight that can fit in', () => {
         const capacity = 85;
         const package1: Item = { index: 1, weight: 50, cost: 45 };
         const package2: Item = { index: 2, weight: 35, cost: 30 };
