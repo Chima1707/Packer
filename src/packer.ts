@@ -7,11 +7,11 @@ export class Packer {
   /**
    * Takes an input file of packages and return indexes of packed packages for each line
    * @param {string} inputFile a file path in the local file system to read packages from
-   * @returns {Item[]} indexes of the packed packages
+   * @returns {Promise<string>} indexes of the packed packages
    * @throws {ApiError}
    */
-  static pack(inputFile: string): string {
-    const fileContent = Util.readFile(inputFile);
+  static async pack(inputFile: string): Promise<string> {
+    const fileContent = await Util.readFile(inputFile);
     const packageItems = Util.parseLines(fileContent.trim());
     const processor: IProcessor = new Processor();
     return packageItems

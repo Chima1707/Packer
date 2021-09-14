@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import { ApiError } from '../error';
 import { Item, PackageItems } from '../types';
 import {
@@ -124,13 +124,13 @@ function parseLine(line: string): PackageItems {
 
 export class Util {
   /**
-   * Reads a file file path synchronously and returns the content as utf8
+   * Reads a file file path asynchronously and returns the content as utf8
    * @param {string} filePath
-   * @returns {string}
+   * @returns {Promise<string>}
    */
-  public static readFile(filePath: string): string {
+  public static async readFile(filePath: string): Promise<string> {
     try {
-      const content = fs.readFileSync(filePath);
+      const content = await fs.readFile(filePath);
       return content.toString('utf8');
     } catch (ex) {
       throw new ApiError(`Error reading file: ${ex}`);
